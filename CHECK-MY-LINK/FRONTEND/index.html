@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHECK MY LINK | Phishing Link Checker & Threat Intelligence</title>
+  <meta name="description" content="Check My Link - Educational Phishing Awareness Story & Real-Time URL Threat Checker. Developed by Krishan Kumar Verma.">
+  <meta name="author" content="Krishan Kumar Verma">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563EB'><path d='M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 14.93c-3.86-1.1-6.8-4.78-6.99-8.93h13.98c-.19 4.15-3.13 7.83-6.99 8.93z'/></svg>" type="image/svg+xml">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+  <!-- GSAP & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Interactive Background Canvas -->
+  <canvas id="cyber-canvas" aria-hidden="true"></canvas>
+  <div class="ambient-glow" id="ambient-glow" aria-hidden="true"></div>
+
+  <!-- Main Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#welcome-screen" class="brand-logo" id="nav-brand">
+        <div class="shield-badge">
+          <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">CHECK MY LINK</span>
+          <span class="brand-tag">Cyber Defense</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#welcome-screen" class="nav-link active">Home</a>
+        <a href="#story-slide-1" class="nav-link">Awareness Story</a>
+        <a href="#scanner-section" class="nav-link">URL Checker</a>
+        <a href="#history-section" class="nav-link">Scan History</a>
+        <a href="#developer-profile" class="nav-link">Developer</a>
+      </nav>
+
+      <!-- System Status Pill & Mobile Menu Toggle -->
+      <div class="nav-actions">
+        <div class="status-pill" id="backend-status-pill" title="System Status">
+          <span class="status-dot"></span>
+          <span class="status-text" id="status-pill-text">Engine Ready</span>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Floating Story Dock Navigation (Bottom Left/Center) -->
+  <aside class="floating-story-dock" id="floating-dock" aria-label="Story Navigation Dock">
+    <div class="dock-inner glass-panel">
+      <button class="dock-btn active" data-target="welcome-screen" title="Welcome Screen">
+        <span class="dock-icon">🏠</span>
+        <span class="dock-label">Intro</span>
+      </button>
+      <div class="dock-separator"></div>
+      <button class="dock-btn" data-target="story-slide-1" title="Slide 1: What is Phishing?">
+        <span class="dock-num">1</span>
+        <span class="dock-label">Phishing</span>
+      </button>
+      <button class="dock-btn" data-target="story-slide-2" title="Slide 2: Trap of Fear">
+        <span class="dock-num">2</span>
+        <span class="dock-label">Fear</span>
+      </button>
+      <button class="dock-btn" data-target="story-slide-3" title="Slide 3: Trap of Greed">
+        <span class="dock-num">3</span>
+        <span class="dock-label">Greed</span>
+      </button>
+      <button class="dock-btn" data-target="story-slide-4" title="Slide 4: How Links Trick You">
+        <span class="dock-num">4</span>
+        <span class="dock-label">Tricks</span>
+      </button>
+      <button class="dock-btn" data-target="story-slide-5" title="Slide 5: How to Stay Safe">
+        <span class="dock-num">5</span>
+        <span class="dock-label">Safety</span>
+      </button>
+      <button class="dock-btn" data-target="story-slide-6" title="Slide 6: Ready to Browse">
+        <span class="dock-num">6</span>
+        <span class="dock-label">Ready</span>
+      </button>
+      <div class="dock-separator"></div>
+      <button class="dock-btn dock-btn-highlight" data-target="scanner-section" title="Jump to URL Checker">
+        <span class="dock-icon">⚡</span>
+        <span class="dock-label">Scanner</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Multi-Section Content -->
+  <main class="page-container" id="main-content">
+
+    <!-- ================================================================
+         1. FRONT PAGE / WELCOME SCREEN
+         Left Side Top: Developer Details + Photo
+         Middle: Check My Link + Subtitle + Intro + Start Reading
+         Bottom Corner: Rounded Dock "Skip the Read"
+         ================================================================ -->
+    <section class="screen-section welcome-screen" id="welcome-screen">
+      <!-- TOP-LEFT CORNER: Developer Profile Card -->
+      <div class="top-left-developer-card glass-panel" id="top-dev-card">
+        <div class="dev-card-avatar-ring">
+          <img 
+            src="assets/profile.jpg" 
+            alt="Krishan Kumar Verma" 
+            class="dev-card-img"
+            onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23080F1F\' stroke=\'%232563EB\' stroke-width=\'4\'/><text x=\'50\' y=\'58\' fill=\'%23FF6B00\' font-size=\'26\' font-weight=\'bold\' text-anchor=\'middle\'>KKV</text></svg>'"
+          >
+          <span class="dev-card-tick">✓</span>
+        </div>
+        <div class="dev-card-meta">
+          <span class="dev-meta-tag">Developer &amp; Researcher</span>
+          <h3 class="dev-meta-name">Krishan Kumar Verma</h3>
+          <span class="dev-meta-uni">University Practical Project</span>
+        </div>
+      </div>
+
+      <!-- CENTER: Main Title & Action -->
+      <div class="welcome-center-content text-center">
+        <div class="hero-badge">
+          <span class="badge-pulse"></span>
+          <span>CYBERSECURITY AWARENESS &bull; THREAT INTELLIGENCE</span>
+        </div>
+
+        <h1 class="hero-main-title">
+          <span class="title-gradient">Check My Link</span>
+        </h1>
+
+        <h2 class="hero-subtitle">
+          Think Before You Click
+        </h2>
+
+        <p class="hero-intro-text">
+          Learn how phishing links trick people and how to stay safe online.
+        </p>
+
+        <div class="welcome-cta-group">
+          <button class="btn btn-primary btn-large btn-glow" id="btn-start-read">
+            <span>Start to Read About the Website</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="btn-arrow">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Three Trust Pills -->
+        <div class="welcome-pills">
+          <div class="trust-pill">
+            <span class="pill-emoji">🛡️</span>
+            <span>100% Safe URL Check</span>
+          </div>
+          <div class="trust-pill">
+            <span class="pill-emoji">⚡</span>
+            <span>Smart Fake Link Detector</span>
+          </div>
+          <div class="trust-pill">
+            <span class="pill-emoji">🌐</span>
+            <span>Live Google Security Scan</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM-RIGHT / CORNER: Rounded Dock Style "Skip the Read" -->
+      <div class="skip-read-dock-wrapper">
+        <button class="skip-read-btn glass-panel" id="btn-skip-read" title="Skip directly to the final slide & URL checker">
+          <span>Skip the Read</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="skip-icon">
+            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+            <line x1="19" y1="5" x2="19" y2="19"></line>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         2. SIX ANIMATED EDUCATIONAL SLIDES (FlowArt / Story Scroll)
+         ================================================================ -->
+    <div class="flow-art-wrapper" id="story-container">
+
+      <!-- SLIDE 1: What is a Phishing Link? -->
+      <section class="story-slide" id="story-slide-1" data-flow-section aria-label="Slide 1: What is a Phishing Link?">
+        <div class="flow-art-container">
+          <div class="slide-header-bar">
+            <span class="slide-num-badge">01 — PHISHING BASICS</span>
+            <span class="slide-category">CYBERSECURITY EDUCATION</span>
+          </div>
+
+          <div class="story-content-grid">
+            <div class="story-text-col">
+              <h2 class="story-title">A Link That Tricks You</h2>
+              <p class="story-body">
+                A phishing link is a fake or misleading link created to trick people into visiting a dangerous website. Scammers may pretend to be a bank, shopping website, or trusted company.
+              </p>
+              <div class="story-callout warning-callout">
+                <span class="callout-icon">🎯</span>
+                <div>
+                  <strong>The Attacker's Goal:</strong>
+                  <span>Often to silently steal your login passwords, private credit card numbers, OTPs, or personal money.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="story-visual-col">
+              <!-- Animated SVG Illustration: Fake SMS with Hook -->
+              <div class="illustration-card glass-panel">
+                <div class="msg-bubble fake-msg">
+                  <div class="msg-header">
+                    <span class="msg-sender">⚠️ Urgent Notification</span>
+                    <span class="msg-time">Just now</span>
+                  </div>
+                  <p class="msg-text">Dear customer, unusual activity noticed. Click here to confirm identity: <span class="fake-link-text">http://secure-bank-login.xyz/verify</span></p>
+                </div>
+                <div class="phishing-hook-anim">
+                  <div class="hook-line"></div>
+                  <div class="hook-icon">🪝</div>
+                  <div class="fish-bait-tag">Phishing Trap</div>
+                </div>
+                <div class="user-hesitation-box">
+                  <span class="hesitate-avatar">🤔</span>
+                  <span class="hesitate-thought">&ldquo;Should I click this? It looks suspicious!&rdquo;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer-bar">
+            <span class="scroll-hint">↓ Scroll to discover how scammers create fear</span>
+            <span class="slide-progress-count">Slide 1 of 6</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: The Trap of Fear -->
+      <section class="story-slide" id="story-slide-2" data-flow-section aria-label="Slide 2: The Trap of Fear">
+        <div class="flow-art-container">
+          <div class="slide-header-bar">
+            <span class="slide-num-badge badge-danger">02 — THE TRAP OF FEAR</span>
+            <span class="slide-category">PSYCHOLOGICAL MANIPULATION</span>
+          </div>
+
+          <div class="story-content-grid">
+            <div class="story-text-col">
+              <h2 class="story-title text-danger">Click Now, Or Lose Access!</h2>
+              <p class="story-body">
+                Scammers try to frighten you into acting quickly. They create artificial panic so you click before you have time to think, verify, or ask anyone.
+              </p>
+              
+              <div class="fear-examples-list">
+                <div class="fear-item">
+                  <span class="fear-icon">🚫</span>
+                  <span>&ldquo;Your bank account will be blocked within 2 hours!&rdquo;</span>
+                </div>
+                <div class="fear-item">
+                  <span class="fear-icon">⚠️</span>
+                  <span>&ldquo;Your account has been suspended due to violations!&rdquo;</span>
+                </div>
+                <div class="fear-item">
+                  <span class="fear-icon">🔒</span>
+                  <span>&ldquo;Verify your credentials immediately to avoid penalties!&rdquo;</span>
+                </div>
+              </div>
+
+              <div class="story-callout tip-callout">
+                <span class="callout-icon">💡</span>
+                <div>
+                  <strong>Golden Rule:</strong>
+                  <span>Legitimate banks and services will never threaten to immediately shut down your account over a random SMS link.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="story-visual-col">
+              <!-- Animated Urgency Countdown & Warning -->
+              <div class="illustration-card glass-panel danger-theme-panel">
+                <div class="alert-box-anim">
+                  <div class="alert-pulse-ring"></div>
+                  <span class="alert-symbol">🚨</span>
+                  <h4>ACCOUNT TERMINATION NOTICE</h4>
+                  <div class="countdown-clock">
+                    <span class="clock-label">Time Remaining:</span>
+                    <span class="clock-digits" id="fear-countdown">00:04:59</span>
+                  </div>
+                </div>
+
+                <div class="user-pause-action">
+                  <span class="pause-badge">✋ PAUSE &amp; THINK</span>
+                  <p class="pause-text">Don&apos;t let fake panic force an accidental click. Real companies never use ticking countdowns.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer-bar">
+            <span class="scroll-hint">↓ Scroll to see the opposite trap: Greed</span>
+            <span class="slide-progress-count">Slide 2 of 6</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: The Trap of Greed -->
+      <section class="story-slide" id="story-slide-3" data-flow-section aria-label="Slide 3: The Trap of Greed">
+        <div class="flow-art-container">
+          <div class="slide-header-bar">
+            <span class="slide-num-badge badge-orange">03 — THE TRAP OF GREED</span>
+            <span class="slide-category">TEMPTATION TACTICS</span>
+          </div>
+
+          <div class="story-content-grid">
+            <div class="story-text-col">
+              <h2 class="story-title text-orange">You Have Won a Prize!</h2>
+              <p class="story-body">
+                Scammers offer fake prizes, free gifts, or unbelievable discounts. They hope excitement will make you drop your guard and ignore obvious warning signs.
+              </p>
+
+              <div class="greed-examples-list">
+                <div class="greed-item">
+                  <span class="greed-icon">📱</span>
+                  <span>&ldquo;Congratulations! You won a brand new Smartphone!&rdquo;</span>
+                </div>
+                <div class="greed-item">
+                  <span class="greed-icon">🎁</span>
+                  <span>&ldquo;Claim your $500 free shopping voucher right now!&rdquo;</span>
+                </div>
+                <div class="greed-item">
+                  <span class="greed-icon">💰</span>
+                  <span>&ldquo;You have received a special monetary reward from government!&rdquo;</span>
+                </div>
+              </div>
+
+              <div class="story-callout orange-callout">
+                <span class="callout-icon">✨</span>
+                <div>
+                  <strong>Remember:</strong>
+                  <span>If an offer sounds too good to be true, it is 100% a scam designed to harvest your personal information.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="story-visual-col">
+              <!-- Animated Gift Box with Warning Rays -->
+              <div class="illustration-card glass-panel orange-theme-panel">
+                <div class="gift-box-anim">
+                  <div class="gift-lid"></div>
+                  <div class="gift-box">🎁</div>
+                  <div class="sparkles-burst">✨ 🌟 💸</div>
+                </div>
+
+                <div class="greed-reality-check">
+                  <div class="reality-warning">
+                    <span class="warning-triangle">⚠️</span>
+                    <span>FAKE LOTTERY &bull; CREDENTIAL THEFT</span>
+                  </div>
+                  <p class="reality-text">&ldquo;Pay $5 shipping fee to claim your free phone&rdquo; &rarr; They steal your credit card details!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer-bar">
+            <span class="scroll-hint">↓ Scroll to inspect lookalike domain tricks</span>
+            <span class="slide-progress-count">Slide 3 of 6</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: How Phishing Links Trick You -->
+      <section class="story-slide" id="story-slide-4" data-flow-section aria-label="Slide 4: How Phishing Links Trick You">
+        <div class="flow-art-container">
+          <div class="slide-header-bar">
+            <span class="slide-num-badge badge-blue">04 — DECEPTION MECHANICS</span>
+            <span class="slide-category">TECHNICAL TRICKS</span>
+          </div>
+
+          <div class="story-content-grid">
+            <div class="story-text-col">
+              <h2 class="story-title text-blue">Look Beyond the Message</h2>
+              <p class="story-body">
+                Attackers use subtle visual tricks to disguise malicious web addresses so they look genuine at a glance.
+              </p>
+
+              <div class="tricks-breakdown">
+                <div class="trick-box">
+                  <span class="trick-number">1</span>
+                  <div>
+                    <strong>Fake Clone Websites:</strong>
+                    <p>They create pixel-perfect copies of login pages (Google, Netflix, Banking).</p>
+                  </div>
+                </div>
+
+                <div class="trick-box">
+                  <span class="trick-number">2</span>
+                  <div>
+                    <strong>Typosquatting &amp; Lookalike Letters:</strong>
+                    <p>Replacing the letter <code>l</code> with number <code>1</code> (e.g. <code>paypa1.example.com</code>).</p>
+                  </div>
+                </div>
+
+                <div class="trick-box">
+                  <span class="trick-number">3</span>
+                  <div>
+                    <strong>Suspicious Data Requests:</strong>
+                    <p>Unsolicited forms demanding passwords, PINs, or One-Time Passwords (OTPs).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="story-visual-col">
+              <!-- Comparison Card: Official vs Impersonator -->
+              <div class="illustration-card glass-panel">
+                <div class="compare-row legit-row">
+                  <div class="compare-tag tag-legit">✓ OFFICIAL GENUINE</div>
+                  <div class="domain-display">
+                    <span class="domain-protocol">https://</span>
+                    <span class="domain-clean">paypal.com</span>
+                    <span class="domain-path">/signin</span>
+                  </div>
+                  <span class="verify-badge">Valid TLS &bull; Verified Host</span>
+                </div>
+
+                <div class="compare-divider">
+                  <span>VERSUS</span>
+                </div>
+
+                <div class="compare-row scam-row">
+                  <div class="compare-tag tag-scam">⚠ PHISHING LOOKALIKE</div>
+                  <div class="domain-display">
+                    <span class="domain-protocol">http://</span>
+                    <span class="domain-spoof">paypa<mark class="letter-swap">1</mark>.example.com</span>
+                    <span class="domain-path">/login.php</span>
+                  </div>
+                  <span class="warning-callout-text">Letter 'l' replaced with number '1' to trick you!</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer-bar">
+            <span class="scroll-hint">↓ Scroll to learn essential safety habits</span>
+            <span class="slide-progress-count">Slide 4 of 6</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: How to Stay Safe -->
+      <section class="story-slide" id="story-slide-5" data-flow-section aria-label="Slide 5: How to Stay Safe">
+        <div class="flow-art-container">
+          <div class="slide-header-bar">
+            <span class="slide-num-badge badge-green">05 — BEST PRACTICES</span>
+            <span class="slide-category">CYBER HYGIENE</span>
+          </div>
+
+          <div class="story-content-grid">
+            <div class="story-text-col">
+              <h2 class="story-title text-green">Pause. Check. Protect.</h2>
+              <p class="story-body">
+                Developing simple, repeatable cyber safety habits will protect you from more than 95% of online phishing attacks.
+              </p>
+
+              <div class="safety-checklist">
+                <div class="checklist-item">
+                  <span class="check-icon">✓</span>
+                  <div>
+                    <strong>Do Not Click Unexpected Links:</strong>
+                    <p>If a message arrived unprompted, do not tap the link inside it.</p>
+                  </div>
+                </div>
+
+                <div class="checklist-item">
+                  <span class="check-icon">✓</span>
+                  <div>
+                    <strong>Inspect the Complete Domain:</strong>
+                    <p>Read the exact website address right before the first slash.</p>
+                  </div>
+                </div>
+
+                <div class="checklist-item">
+                  <span class="check-icon">✓</span>
+                  <div>
+                    <strong>Never Share Passwords or OTPs:</strong>
+                    <p>No legitimate organization will ask you for your private OTP via a link.</p>
+                  </div>
+                </div>
+
+                <div class="checklist-item">
+                  <span class="check-icon">✓</span>
+                  <div>
+                    <strong>When Unsure, Never Open:</strong>
+                    <p>Use a verified scanner like Check My Link to analyze the safety score first.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="story-visual-col">
+              <!-- Animated Glowing Security Shield -->
+              <div class="illustration-card glass-panel green-theme-panel text-center">
+                <div class="shield-protect-anim">
+                  <div class="shield-pulse-bg"></div>
+                  <div class="shield-large-icon">🛡️</div>
+                  <div class="shield-active-check">✓</div>
+                </div>
+                <h3 class="shield-heading">Zero-Trust Mindset</h3>
+                <p class="shield-subtext">Always verify before you trust. Check suspicious links before they reach your browser.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-footer-bar">
+            <span class="scroll-hint">↓ Scroll to complete awareness &amp; launch scanner</span>
+            <span class="slide-progress-count">Slide 5 of 6</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: Ready to Browse Safely? -->
+      <section class="story-slide" id="story-slide-6" data-flow-section aria-label="Slide 6: Ready to Browse Safely?">
+        <div class="flow-art-container text-center">
+          <div class="slide-header-bar">
+            <span class="slide-num-badge">06 — FINAL STAGE</span>
+            <span class="slide-category">READY FOR ACTION</span>
+          </div>
+
+          <div class="final-slide-inner">
+            <div class="final-badge">
+              <span>NOW YOU KNOW. START BROWSING SAFELY.</span>
+            </div>
+
+            <h2 class="final-title">Your Safety Starts With One Click</h2>
+
+            <p class="final-description">
+              Phishing links often use fear, excitement, or trust to trick people. 
+              Take a moment to check any suspicious link before opening it.
+            </p>
+
+            <!-- Prominent Action Buttons -->
+            <div class="final-actions-group">
+              <button class="btn btn-primary btn-large btn-glow" id="btn-start-checking">
+                <span>Start Checking Links</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="btn-arrow">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+
+              <button class="btn btn-outline btn-large" id="btn-read-again">
+                <span>↺ Read Again</span>
+              </button>
+            </div>
+
+            <p class="final-motto">
+              &ldquo;Think Before You Click. Stay Safe Online.&rdquo;
+            </p>
+          </div>
+
+          <div class="slide-footer-bar">
+            <span class="scroll-hint">↓ Or scroll down to watch Check My Link become the live website</span>
+            <span class="slide-progress-count">Slide 6 of 6</span>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- End flow-art-wrapper -->
+
+
+    <!-- ================================================================
+         3. MAIN CINEMATIC ANIMATION: CHECK MY LINK BECOMES THE WEBSITE
+         (Prompt 2 Glyph Portal Zoom Camera Effect)
+         ================================================================ -->
+    <section class="portal-transition-section" id="portal-transition" aria-label="Check My Link Portal Transition">
+      <div class="portal-pin-wrapper" id="portal-pin">
+        <!-- Background Field that expands -->
+        <div class="portal-backdrop" id="portal-backdrop"></div>
+
+        <!-- Zooming Text Elements -->
+        <div class="portal-text-layer" id="portal-text-layer">
+          <h2 class="portal-giant-text" id="portal-giant-text">
+            <span class="portal-word-blue">CHECK</span>
+            <span class="portal-word-orange">MY</span>
+            <span class="portal-word-blue">LINK</span>
+          </h2>
+          <p class="portal-caption-text" id="portal-caption">
+            Entering Live URL Threat Inspection Hub...
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         4. THE REAL WORKING CHECK MY LINK WEBSITE INTERFACE
+         URL Input Field &bull; Risk Cards &bull; Backend Integration &bull; History
+         ================================================================ -->
+    <div class="live-website-wrapper" id="scanner-section">
+
+      <!-- Scanner Header Banner -->
+      <section class="scanner-hero-section">
+        <div class="slide-wrapper">
+          <div class="section-header text-center">
+            <div class="section-tag">REAL-TIME THREAT SCANNER</div>
+            <h2 class="section-title">
+              <span class="title-gradient">CHECK YOUR LINK</span>
+            </h2>
+            <p class="section-subtitle">
+              Paste your URL below to check whether it is potentially dangerous.
+            </p>
+          </div>
+
+          <!-- Scanner Card -->
+          <div class="scanner-card glass-panel" id="scanner-box">
+            <form id="url-scan-form" class="scan-form" onsubmit="return false;">
+              <div class="input-group">
+                <div class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                  </svg>
+                </div>
+
+                <input 
+                  type="text" 
+                  id="url-input" 
+                  class="url-input" 
+                  placeholder="Paste suspicious URL (e.g. https://secure-bank-login.xyz/verify)" 
+                  autocomplete="off" 
+                  spellcheck="false"
+                  required
+                />
+
+                <div class="input-inline-actions">
+                  <button type="button" class="btn-icon" id="btn-paste" title="Paste from clipboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                    </svg>
+                    <span class="btn-text">Paste</span>
+                  </button>
+                  <button type="button" class="btn-icon" id="btn-clear" title="Clear input">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="18" y1="6" x2="6" y2="18"/>
+                      <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                    <span class="btn-text">Clear</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Primary Action Buttons -->
+              <div class="scanner-button-row">
+                <button type="submit" class="btn btn-primary btn-large btn-scan btn-glow" id="btn-check-link">
+                  <span class="btn-icon-spin" id="scan-icon-spin">⚡</span>
+                  <span id="scan-btn-label">Check Link Now</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-large" id="btn-random-sample">
+                  <span>🎲 Random Sample Link</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Demonstration Sample URLs Grid -->
+            <div class="sample-links-container">
+              <div class="samples-header">
+                <span class="samples-title">VIVA DEMONSTRATION TEST CASES:</span>
+                <span class="samples-caption">Click any sample below to load into scanner</span>
+              </div>
+
+              <div class="samples-grid">
+                <div class="sample-group">
+                  <span class="sample-group-title safe-label">✓ SAFE BENCHMARKS</span>
+                  <div class="sample-buttons">
+                    <button type="button" class="sample-chip chip-safe" data-url="https://www.google.com">
+                      https://www.google.com
+                    </button>
+                    <button type="button" class="sample-chip chip-safe" data-url="https://www.wikipedia.org">
+                      https://www.wikipedia.org
+                    </button>
+                    <button type="button" class="sample-chip chip-safe" data-url="https://www.microsoft.com">
+                      https://www.microsoft.com
+                    </button>
+                  </div>
+                </div>
+
+                <div class="sample-group">
+                  <span class="sample-group-title danger-label">⚠ SUSPICIOUS PHISHING TEST CASES</span>
+                  <div class="sample-buttons">
+                    <button type="button" class="sample-chip chip-danger" data-url="http://paypa1-security-update.account-verification-login.com/login.php">
+                      paypa1-security-update.account-verification-login.com
+                    </button>
+                    <button type="button" class="sample-chip chip-danger" data-url="http://192.168.1.100/secure-banking/update-credentials">
+                      192.168.1.100/secure-banking/update-credentials
+                    </button>
+                    <button type="button" class="sample-chip chip-danger" data-url="http://free-giftcard-claim-apple-id.xyz/verify">
+                      free-giftcard-claim-apple-id.xyz/verify
+                    </button>
+                  </div>
+                </div>
+
+                <div class="sample-group">
+                  <span class="sample-group-title warning-label">⚙️ MALFORMED / IRREGULAR TEST CASES</span>
+                  <div class="sample-buttons">
+                    <button type="button" class="sample-chip chip-warn" data-url="not-a-valid-url">
+                      not-a-valid-url (Malformed Syntax)
+                    </button>
+                    <button type="button" class="sample-chip chip-warn" data-url="ftp://malicious-file-transfer.com">
+                      ftp://malicious-file-transfer.com (Unsupported Protocol)
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RANDOM WEBSITE GENERATOR BOX -->
+          <div class="random-generator-card glass-panel" id="random-generator-box">
+            <div class="rg-header">
+              <div class="rg-header-left">
+                <div class="section-tag" style="margin-bottom: 6px;">DISCOVERY ENGINE</div>
+                <h3 class="rg-title">Try a Random Website</h3>
+                <p class="rg-subtitle">Discover different website examples</p>
+              </div>
+              <div class="rg-sequence-pill" id="rg-next-pill">
+                <span class="rg-pill-dot" id="rg-pill-dot"></span>
+                <span>Next Click: <strong id="rg-next-category-text">SAFE WEBSITE</strong></span>
+              </div>
+            </div>
+
+            <!-- Display Area showing the generated website URL -->
+            <div class="rg-display-area" id="rg-display-area">
+              <!-- Initial Empty State -->
+              <div class="rg-empty-state" id="rg-empty-state">
+                <div class="rg-empty-icon">🎲</div>
+                <p class="rg-empty-title">Ready to test website examples</p>
+                <p class="rg-empty-desc">
+                  Click <strong>&ldquo;Generate Random Link&rdquo;</strong> to start. The generator strictly alternates: 
+                  <span class="t-green font-semibold">1st: Safe</span> &rarr; 
+                  <span class="t-orange font-semibold">2nd: Suspicious</span> &rarr; 
+                  <span class="t-green font-semibold">3rd: Safe</span> &rarr; 
+                  <span class="t-orange font-semibold">4th: Suspicious</span>.
+                </p>
+              </div>
+
+              <!-- Active Generated Link Result -->
+              <div class="rg-result-box" id="rg-result-box" style="display: none;">
+                <div class="rg-result-top">
+                  <div class="rg-badge-group">
+                    <span class="rg-category-badge" id="rg-category-badge">
+                      <span id="rg-category-icon">🛡️</span>
+                      <span id="rg-category-name">SAFE WEBSITE</span>
+                    </span>
+                    <span class="rg-type-badge" id="rg-type-badge">Commonly Used Website</span>
+                  </div>
+                  <span class="rg-seq-num" id="rg-link-seq-index">Link #1</span>
+                </div>
+
+                <!-- URL text display -->
+                <div class="rg-url-container">
+                  <span class="rg-url-text" id="rg-url-display">https://www.google.com</span>
+                </div>
+
+                <!-- Educational disclaimer notice (shown for suspicious links) -->
+                <div class="rg-educational-notice" id="rg-educational-notice" style="display: none;">
+                  <span class="rg-notice-icon">⚠️</span>
+                  <span class="rg-notice-text">This is a fictional example for cybersecurity education.</span>
+                </div>
+
+                <!-- Actions for generated URL -->
+                <div class="rg-link-actions">
+                  <button type="button" class="btn btn-small btn-primary" id="btn-rg-test-in-scanner" title="Load directly into scanner above">
+                    <span>⚡ Test in Scanner</span>
+                  </button>
+                  <button type="button" class="btn btn-small btn-outline" id="btn-rg-copy-url" title="Copy URL to clipboard">
+                    <span>📋 Copy Link</span>
+                  </button>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-small btn-open-clean" id="btn-rg-open-link" style="display: none;">
+                    <span>Open Website ↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Category Exhausted Message -->
+              <div class="rg-exhausted-box" id="rg-exhausted-box" style="display: none;">
+                <div class="rg-exhausted-icon">ℹ️</div>
+                <p class="rg-exhausted-text" id="rg-exhausted-text">All links in this category have been used.</p>
+                <p class="rg-exhausted-subtext">Click Reset below to clear your used history and start again from a Safe link.</p>
+              </div>
+            </div>
+
+            <!-- Footer Controls & Counter -->
+            <div class="rg-footer">
+              <div class="rg-controls">
+                <button type="button" class="btn btn-primary btn-large btn-glow" id="btn-generate-random">
+                  <span class="rg-btn-icon">⚡</span>
+                  <span id="btn-generate-label">Generate Random Link</span>
+                </button>
+                <button type="button" class="btn btn-outline" id="btn-reset-random" title="Reset sequence and clear used history">
+                  <span>↻ Reset</span>
+                </button>
+              </div>
+
+              <!-- Used Links Counter -->
+              <div class="rg-stats-counter" id="rg-stats-counter">
+                <div class="rg-counter-item">
+                  <span class="rg-counter-label">Safe Used:</span>
+                  <strong class="rg-counter-val t-green" id="rg-safe-count">0 / 100</strong>
+                </div>
+                <div class="rg-counter-divider">•</div>
+                <div class="rg-counter-item">
+                  <span class="rg-counter-label">Suspicious Used:</span>
+                  <strong class="rg-counter-val t-orange" id="rg-suspicious-count">0 / 100</strong>
+                </div>
+                <div class="rg-counter-divider">•</div>
+                <div class="rg-counter-item">
+                  <span class="rg-counter-label">Total Used:</span>
+                  <strong class="rg-counter-val" id="rg-total-count">0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULTS SECTION -->
+      <section class="results-section" id="results-section">
+        <div class="slide-wrapper">
+          <!-- Scanning Progress State (Visible during analysis) -->
+          <div class="scan-loading-card glass-panel" id="scan-loading-container" style="display: none;">
+            <div class="radar-scanner">
+              <div class="radar-circle"></div>
+              <div class="radar-sweep"></div>
+              <div class="radar-center">🛡️</div>
+            </div>
+
+            <h3 class="loading-heading">Running Smart Security Diagnostics...</h3>
+            <p class="loading-subheading" id="loading-status-text">Checking URL format and web protocol (HTTP/HTTPS)...</p>
+
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" id="scan-progress-bar" style="width: 15%;"></div>
+            </div>
+            <span class="progress-percentage" id="scan-progress-percentage">15%</span>
+
+            <!-- Real-Time Diagnostic Audit Logs -->
+            <div class="scanner-audit-log" id="scanner-audit-log">
+              <div class="audit-log-line">✓ Protocol validation: HTTP / HTTPS</div>
+            </div>
+          </div>
+
+          <!-- Dynamic Results Container -->
+          <div class="result-display-area" id="result-display-area">
+            <!-- Default Empty State -->
+            <div class="empty-result-card glass-panel text-center" id="empty-result-placeholder">
+              <div class="empty-icon">🔍</div>
+              <h3>Ready to Inspect Any Website Link</h3>
+              <p>Paste a suspicious link above or click one of the Viva Demonstration test cases to evaluate its safety score in real-time.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LIVE SCAN HISTORY SECTION -->
+      <section class="secondary-section" id="history-section">
+        <div class="slide-wrapper">
+          <div class="history-header-row">
+            <div>
+              <div class="section-tag">AUDIT TRAIL &amp; DATABASE LOG</div>
+              <h3 class="section-title">Recent Scan History</h3>
+              <p class="section-subtitle">Real-time inspection history recorded in MongoDB.</p>
+            </div>
+            <div class="history-actions">
+              <button class="btn btn-outline btn-small" id="btn-refresh-history">
+                <span>↻ Refresh</span>
+              </button>
+              <button class="btn btn-danger-outline btn-small" id="btn-clear-history">
+                <span>🗑 Clear History</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Statistics Ribbon -->
+          <div class="history-stats-ribbon">
+            <div class="stat-pill glass-panel">
+              <span class="stat-title">Total Scans</span>
+              <span class="stat-value" id="stats-total">0</span>
+            </div>
+            <div class="stat-pill glass-panel">
+              <span class="stat-title">High Risk Detected</span>
+              <span class="stat-value t-danger" id="stats-high-risk">0</span>
+            </div>
+            <div class="stat-pill glass-panel">
+              <span class="stat-title">Safe Verified</span>
+              <span class="stat-value t-green" id="stats-safe">0</span>
+            </div>
+            <div class="stat-pill glass-panel">
+              <span class="stat-title">Suspicious Warnings</span>
+              <span class="stat-value t-orange" id="stats-suspicious">0</span>
+            </div>
+          </div>
+
+          <!-- History Table -->
+          <div class="history-table-wrapper glass-panel">
+            <table class="history-table" id="history-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Target Domain</th>
+                  <th>Risk Level</th>
+                  <th>Threat Category</th>
+                  <th>Protocol</th>
+                  <th>Engine Source</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body">
+                <tr>
+                  <td colspan="6" class="text-center">Loading scan history from backend...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ARCHITECTURE SECTION -->
+      <section class="secondary-section" id="how-it-works">
+        <div class="slide-wrapper">
+          <div class="section-header text-center">
+            <div class="section-tag">SYSTEM ARCHITECTURE</div>
+            <h3 class="section-title">HOW PHISHING DETECTION WORKS</h3>
+            <p class="section-subtitle">Four-tiered defense pipeline protecting users without executing untrusted code.</p>
+          </div>
+
+          <div class="workflow-steps-grid">
+            <div class="workflow-step-card glass-panel">
+              <div class="step-number">01</div>
+              <div class="step-icon">🔒</div>
+              <h4 class="step-title">Safe URL Checking &amp; Cleaning</h4>
+              <p class="step-desc">
+                Input links are checked for correct web format (HTTP/HTTPS). Private internal network addresses and dangerous script files are instantly rejected.
+              </p>
+            </div>
+
+            <div class="workflow-step-card glass-panel">
+              <div class="step-number">02</div>
+              <div class="step-icon">🧠</div>
+              <h4 class="step-title">Smart Phishing Detection</h4>
+              <p class="step-desc">
+                Scans for fake brand spellings (like paypa1), hidden credential-theft keywords, and suspicious domain endings (.xyz, .top) used by scammers.
+              </p>
+            </div>
+
+            <div class="workflow-step-card glass-panel">
+              <div class="step-number">03</div>
+              <div class="step-icon">🛰️</div>
+              <h4 class="step-title">Google Safe Browsing Check</h4>
+              <p class="step-desc">
+                Queries Google Safe Browsing threat databases in real time to see if the website has been reported for online fraud or malware.
+              </p>
+            </div>
+
+            <div class="workflow-step-card glass-panel">
+              <div class="step-number">04</div>
+              <div class="step-icon">📊</div>
+              <h4 class="step-title">Clear Safety Report</h4>
+              <p class="step-desc">
+                Shows an easy-to-understand Red (High Risk) or Green (Safe) card with clear explanation bullet points. Dangerous links are permanently locked.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEVELOPER PROFILE SECTION -->
+      <section class="secondary-section" id="developer-profile">
+        <div class="slide-wrapper">
+          <div class="developer-profile-card glass-panel">
+            <div class="dev-card-left">
+              <div class="dev-portrait-container">
+                <img 
+                  src="assets/profile.jpg" 
+                  alt="Krishan Kumar Verma" 
+                  class="dev-full-photo"
+                >
+              </div>
+              <div class="dev-badges">
+                <span class="pill-badge">KRISHAN KUMAR VERMA</span>
+                <span class="pill-badge pill-orange">Enrollment: 20240882</span>
+              </div>
+            </div>
+
+            <div class="dev-card-right">
+              <div class="section-tag">PROJECT LEAD &amp; DEVELOPER</div>
+              <h3 class="dev-card-name">Developed by Krishan Kumar Verma</h3>
+              <p class="dev-bio">
+                This project is designed and developed by <strong>Krishan Kumar Verma</strong> (Enrollment No: <strong>20240882</strong>) as a <strong>University Practical Project</strong>. 
+                The main goal of this website is to protect students and everyday users from dangerous phishing links, fake login pages, and online fraud. 
+                It scans suspicious website links quickly and safely before you open them, helping keep your personal accounts and passwords secure.
+              </p>
+
+              <div class="project-spec-list">
+                <div class="spec-item">
+                  <span class="spec-label">Project Name:</span>
+                  <span class="spec-value">CHECK MY LINK - Phishing URL Analyzer</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Developer:</span>
+                  <span class="spec-value">Krishan Kumar Verma</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Enrollment No:</span>
+                  <span class="spec-value" style="color:var(--accent-orange); font-weight:700;">20240882</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Project Type:</span>
+                  <span class="spec-value">University Cybersecurity Practical Project</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Technologies Used:</span>
+                  <span class="spec-value">HTML5, CSS3, JavaScript, GSAP, Node.js, Express.js, MongoDB, Google Safe Browsing API</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Safety Guarantee:</span>
+                  <span class="spec-value">100% Safe Link Inspection &bull; Zero Server Risk</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- End live-website-wrapper -->
+
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <span class="footer-logo">CHECK MY LINK</span>
+        <span class="footer-copy">&copy; 2026 Designed &amp; Developed by <strong>Krishan Kumar Verma</strong> (Enrollment: 20240882)</span>
+      </div>
+      <div class="footer-right">
+        <span class="footer-disclaimer">
+          University Practical Demonstration &bull; Phishing Awareness Story &bull; Threat Intelligence
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
