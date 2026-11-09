@@ -1,4 +1,4 @@
-/* ===================================================================
+﻿/* ===================================================================
    CHECK MY LINK - Professional Cybersecurity Stylesheet
    Developer: Krishan Kumar Verma | Enrollment: 20240882
    Theme: Dark Navy (#080F1F) | Primary Blue (#2563EB) | Accent Orange (#FF6B00)
@@ -73,9 +73,19 @@ html {
 body {
   position: relative;
   min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
   background-color: var(--bg-dark-navy);
   line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font-family: inherit;
 }
 
 /* Zero glowing or flashing cursors */
@@ -529,7 +539,7 @@ button, a, input, select, .sample-chip, .dock-btn {
 
 .hero-main-title {
   font-family: var(--font-heading);
-  font-size: clamp(3.2rem, 8vw, 5.8rem);
+  font-size: clamp(2.1rem, 7.5vw, 5.8rem);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -1.5px;
@@ -2824,67 +2834,810 @@ button, a, input, select, .sample-chip, .dock-btn {
 .footer-disclaimer { font-size: 0.78rem; color: var(--text-dim); }
 
 /* ===================================================================
-   RESPONSIVE DESIGN (MOBILE & TABLET)
+   COMPREHENSIVE MASTER RESPONSIVE SYSTEM
+   Devices Covered:
+   1. Large Desktop (1441px+)
+   2. Laptops & Standard Desktop (1025px - 1440px)
+   3. Tablets (768px - 1024px)
+   4. Large Mobile (481px - 767px)
+   5. Standard Mobile (375px - 480px)
+   6. Ultra-Compact Mobile (320px - 374px)
    =================================================================== */
 
-@media (max-width: 992px) {
+/* --- Mobile Menu Toggle Animation --- */
+.menu-toggle {
+  cursor: pointer;
+  z-index: 105;
+}
+
+.menu-toggle span {
+  display: block;
+  transform-origin: center;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- 1. LAPTOP & MEDIUM SCREENS (1025px - 1200px) --- */
+@media (max-width: 1200px) {
   .story-content-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 36px;
   }
-  .top-left-developer-card {
-    position: static;
-    margin-bottom: 24px;
-    width: 100%;
-    max-width: 340px;
-  }
-  .skip-read-dock-wrapper {
-    position: static;
-    margin-top: 24px;
-  }
-  .developer-profile-card {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .dev-portrait-container {
-    margin: 0 auto 16px auto;
+  .workflow-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
-@media (max-width: 768px) {
-  :root {
-    --navbar-height: 64px;
+/* --- 2. TABLET LANDSCAPE & PORTRAIT (768px - 1024px) --- */
+@media (max-width: 1024px) {
+  .workflow-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
-  .menu-toggle { display: flex; }
+  .history-stats-ribbon {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 992px) {
+  :root {
+    --navbar-height: 66px;
+  }
+
+  /* Hamburger Navigation */
+  .menu-toggle {
+    display: flex;
+  }
+
   .nav-menu {
     position: fixed;
     top: var(--navbar-height);
     left: 0;
     width: 100%;
     background: rgba(8, 15, 31, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
-    padding: 24px;
-    gap: 18px;
-    border-bottom: 1px solid rgba(37, 99, 235, 0.2);
-    transform: translateY(-150%);
-    transition: transform var(--transition-normal);
+    padding: 24px 20px 30px 20px;
+    gap: 14px;
+    border-bottom: 1px solid rgba(37, 99, 235, 0.28);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65);
+    transform: translateY(-160%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    z-index: 99;
   }
-  .nav-menu.open { transform: translateY(0); }
-  .hero-main-title { font-size: 3rem; }
-  .story-title { font-size: 2.2rem; }
-  .portal-giant-text { font-size: 3rem; flex-direction: column; gap: 4px; }
-  .scanner-button-row { grid-template-columns: 1fr; }
+
+  .nav-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: 12px 18px;
+    font-size: 1.02rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: rgba(37, 99, 235, 0.16);
+    color: var(--color-white);
+  }
+
+  .nav-link.active::after {
+    display: none;
+  }
+
+  /* Welcome Screen Layout Adaptation */
+  .welcome-screen {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    min-height: 100vh;
+    padding: calc(var(--navbar-height) + 24px) 20px 90px 20px;
+  }
+
+  .top-left-developer-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 0 auto 24px auto;
+    width: 100%;
+    max-width: 380px;
+    justify-content: center;
+  }
+
+  .welcome-center-content {
+    padding-top: 10px;
+    width: 100%;
+  }
+
+  .skip-read-dock-wrapper {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin: 28px auto 0 auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Story Slides Adaptation */
+  .story-slide {
+    height: auto;
+    min-height: auto;
+    padding: calc(var(--navbar-height) + 20px) 20px 90px 20px;
+  }
+
+  .flow-art-container {
+    min-height: auto;
+    height: auto;
+    justify-content: flex-start;
+    gap: 28px;
+  }
+
+  .story-content-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin: 0;
+  }
+
+  .illustration-card {
+    min-height: auto;
+    padding: 26px 20px;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .story-title {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+  }
+
+  /* Portal Zoom Text */
+  .portal-giant-text {
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  /* Scanner Hero Section */
+  .scanner-hero-section {
+    padding: 40px 20px 30px 20px;
+  }
+
+  .scanner-card {
+    padding: 28px 22px;
+    margin-bottom: 36px;
+  }
+
+  .scanner-button-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* Random Website Generator */
+  .random-generator-card {
+    padding: 28px 24px;
+  }
+
+  /* Developer Profile Card */
+  .developer-profile-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 36px 24px;
+    gap: 28px;
+  }
+
+  .dev-portrait-container {
+    margin: 0 auto 16px auto;
+  }
+
+  .dev-badges {
+    align-items: center;
+  }
+
+  .project-spec-list {
+    text-align: left;
+  }
+}
+
+/* --- 3. LARGE MOBILE & PORTRAIT TABLET (481px - 767px) --- */
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 64px;
+  }
+
+  .hero-main-title {
+    font-size: clamp(2.3rem, 7vw, 3.4rem);
+  }
+
+  .hero-subtitle {
+    font-size: 1.4rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 6vw, 2.3rem);
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .scanner-button-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .btn-scan {
+    width: 100%;
+    font-size: 1.05rem;
+  }
+
+  .sample-chip {
+    white-space: normal;
+    word-break: break-all;
+    font-size: 0.74rem;
+    line-height: 1.4;
+  }
+
+  /* Random Website Generator Stacking */
+  .random-generator-card {
+    padding: 24px 18px;
+  }
+
+  .rg-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .rg-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .rg-controls {
+    width: 100%;
+  }
+
+  .rg-controls button {
+    flex: 1 1 auto;
+  }
+
+  .rg-stats-counter {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .rg-display-area {
+    padding: 18px 14px;
+    min-height: 140px;
+  }
+
+  .rg-url-container {
+    font-size: 0.92rem;
+    padding: 12px 14px;
+  }
+
+  /* Result Cards Centering & Responsive */
+  .result-card-safe,
+  .result-card-danger {
+    padding: 32px 18px;
+    width: 100%;
+  }
+
+  .result-icon-box {
+    width: 64px;
+    height: 64px;
+    font-size: 1.9rem;
+  }
+
+  .result-header-text h3 {
+    font-size: 1.6rem;
+  }
+
+  .danger-subtitle,
+  .safe-subtitle {
+    font-size: 0.94rem;
+  }
+
+  .result-meta-grid {
+    padding: 14px 16px;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .danger-banner-lock {
+    padding: 12px 14px;
+    font-size: 0.82rem;
+  }
+
+  .result-card-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* History Table Horizontal Touch-Scroll */
+  .history-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .history-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .history-actions button {
+    flex: 1 1 auto;
+  }
+
+  .history-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+
+  .history-table {
+    min-width: 650px;
+  }
+
+  /* Workflow Grid */
+  .workflow-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Threat Cards */
+  .threat-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Floating Story Dock */
   .floating-story-dock {
     bottom: 12px;
-    width: 95%;
+    width: calc(100% - 24px);
+    max-width: 440px;
   }
+
   .dock-inner {
     padding: 6px 10px;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 4px;
   }
-  .dock-label { display: none; }
+
+  .dock-label {
+    display: none;
+  }
+
+  .dock-btn {
+    padding: 6px 10px;
+    min-width: 36px;
+    min-height: 36px;
+    justify-content: center;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 28px 16px 90px 16px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Canvas & Glow Lightweight Optimization */
+  #cyber-canvas {
+    opacity: 0.4;
+  }
+
+  .ambient-glow {
+    width: 340px;
+    height: 340px;
+    opacity: 0.55;
+  }
+}
+
+/* --- 4. STANDARD SMARTPHONES (375px - 480px) --- */
+@media (max-width: 480px) {
+  .slide-wrapper,
+  .flow-art-container,
+  .welcome-screen,
+  .secondary-section,
+  .results-section,
+  .footer {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  /* Navbar Mobile Header */
+  .nav-container {
+    padding: 0 14px;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
+  .brand-tag {
+    font-size: 0.62rem;
+  }
+
+  .shield-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  .shield-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .status-pill {
+    padding: 4px 10px;
+    font-size: 0.72rem;
+  }
+
+  /* Welcome Screen Typography */
+  .hero-badge {
+    font-size: 0.68rem;
+    padding: 4px 12px;
+    margin-bottom: 18px;
+  }
+
+  .hero-main-title {
+    font-size: 2.25rem;
+    letter-spacing: -0.8px;
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-intro-text {
+    font-size: 0.96rem;
+    margin-bottom: 26px;
+    padding: 0 6px;
+  }
+
+  .welcome-cta-group .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .welcome-pills {
+    gap: 8px;
+  }
+
+  .trust-pill {
+    font-size: 0.78rem;
+    padding: 6px 12px;
+  }
+
+  /* Developer Top Card on Phones */
+  .top-left-developer-card {
+    padding: 10px 14px;
+    max-width: 330px;
+    gap: 12px;
+  }
+
+  .dev-card-avatar-ring {
+    width: 54px;
+    height: 54px;
+  }
+
+  .dev-meta-name {
+    font-size: 0.88rem;
+  }
+
+  .dev-meta-enrollment {
+    font-size: 0.7rem;
+  }
+
+  .skip-read-btn {
+    font-size: 0.82rem;
+    padding: 8px 16px;
+  }
+
+  /* Story Presentation */
+  .story-title {
+    font-size: 1.85rem;
+    line-height: 1.15;
+  }
+
+  .story-body {
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  .portal-giant-text {
+    font-size: clamp(2rem, 9vw, 3.2rem);
+  }
+
+  /* Scanner Input Optimization */
+  .scanner-card {
+    padding: 18px 14px;
+    border-radius: var(--radius-md);
+  }
+
+  .input-group {
+    padding: 6px 8px;
+  }
+
+  .url-input {
+    font-size: 0.92rem;
+    padding: 8px 4px;
+  }
+
+  .btn-icon {
+    padding: 6px 8px;
+    font-size: 0.72rem;
+  }
+
+  /* Random Generator on Phones */
+  .random-generator-card {
+    padding: 20px 14px;
+  }
+
+  .rg-title {
+    font-size: 1.3rem;
+  }
+
+  .rg-subtitle {
+    font-size: 0.84rem;
+  }
+
+  .rg-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .rg-controls button {
+    width: 100%;
+  }
+
+  .rg-url-container {
+    font-size: 0.82rem;
+    padding: 10px 12px;
+  }
+
+  .rg-link-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .rg-link-actions .btn {
+    width: 100%;
+  }
+
+  /* Centered Result Metadata & Actions */
+  .result-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .meta-field-label {
+    font-size: 0.68rem;
+    margin-bottom: 2px;
+  }
+
+  .meta-field-value {
+    font-size: 0.88rem;
+  }
+
+  .result-card-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .result-card-actions .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* History Ribbon Stats */
+  .history-stats-ribbon {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .stat-pill {
+    padding: 10px 12px;
+  }
+
+  .stat-value {
+    font-size: 1.35rem;
+  }
+
+  .stat-title {
+    font-size: 0.68rem;
+  }
+
+  /* Developer Profile Card */
+  .developer-profile-card {
+    padding: 22px 14px;
+  }
+
+  .dev-portrait-container {
+    width: 140px;
+    height: 140px;
+  }
+
+  .dev-card-name {
+    font-size: 1.5rem;
+  }
+
+  .spec-item {
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+  }
+
+  .spec-label {
+    width: auto;
+    font-size: 0.78rem;
+  }
+
+  .spec-value {
+    font-size: 0.84rem;
+  }
+
+  /* Toast Notifications Full Width */
+  .toast-container {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+  }
+
+  .toast {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* --- 5. ULTRA-COMPACT MOBILE (320px - 374px) --- */
+@media (max-width: 374px) {
+  :root {
+    --navbar-height: 60px;
+  }
+
+  .nav-container {
+    padding: 0 10px;
+  }
+
+  .brand-title {
+    font-size: 0.98rem;
+  }
+
+  .status-pill .status-text {
+    display: none;
+  }
+
+  .status-pill {
+    padding: 6px;
+    border-radius: 50%;
+    min-width: 24px;
+    min-height: 24px;
+    justify-content: center;
+  }
+
+  .btn-icon span {
+    display: none;
+  }
+
+  .btn-icon {
+    padding: 8px;
+  }
+
+  .hero-main-title {
+    font-size: 1.95rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem;
+  }
+
+  .top-left-developer-card {
+    max-width: 290px;
+    padding: 8px 10px;
+  }
+
+  .dev-card-avatar-ring {
+    width: 48px;
+    height: 48px;
+  }
+
+  .history-stats-ribbon {
+    grid-template-columns: 1fr;
+  }
+
+  .floating-story-dock {
+    width: calc(100% - 12px);
+    bottom: 6px;
+  }
+
+  .dock-inner {
+    padding: 4px 6px;
+    gap: 2px;
+  }
+
+  .dock-btn {
+    padding: 4px 6px;
+  }
+
+  .dock-separator {
+    display: none;
+  }
+}
+
+/* --- 6. TOUCH DEVICE ACCESSIBILITY & TAP OPTIMIZATIONS --- */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover,
+  .dock-btn:hover,
+  .sample-chip:hover,
+  .glass-panel:hover,
+  .top-left-developer-card:hover,
+  .random-generator-card:hover {
+    transform: none;
+  }
+
+  .btn:active,
+  .dock-btn:active,
+  .sample-chip:active,
+  .skip-read-btn:active {
+    transform: scale(0.97);
+  }
+
+  button, a, input, select, .sample-chip, .dock-btn {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Safe Area Inset Support for Modern iOS / Android Devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .footer {
+    padding-bottom: max(80px, calc(80px + env(safe-area-inset-bottom)));
+  }
+  .floating-story-dock {
+    bottom: max(12px, calc(12px + env(safe-area-inset-bottom)));
+  }
 }
 
 /* ===================================================================

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ===================================================================
  * CHECK MY LINK - Frontend Application Script
  * Developer: Krishan Kumar Verma | Enrollment: 20240882
@@ -283,12 +283,28 @@ function initStoryNavigation() {
 
   // Mobile navbar toggle
   if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navMenu.classList.toggle('open');
+      menuToggle.classList.toggle('active', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
     navLinks.forEach((link) => {
-      link.addEventListener('click', () => navMenu.classList.remove('open'));
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        navMenu.classList.remove('open');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
